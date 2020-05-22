@@ -51,8 +51,9 @@ class ClassIcpCvHelper(BaseIcpCvHelper, ClassifierMixin):
 	>>> from nonconformist.evaluation import ClassIcpCvHelper
 	>>> from nonconformist.evaluation import class_mean_errors
 	>>> from nonconformist.evaluation import cross_val_score
+	>>> from nonconformist.base import ClassifierAdapter
 	>>> data = load_iris()
-	>>> nc = ProbEstClassifierNc(RandomForestClassifier(), MarginErrFunc())
+	>>> nc = ClassifierNc(ClassifierAdapter(RandomForestClassifier()), MarginErrFunc())
 	>>> icp = IcpClassifier(nc)
 	>>> icp_cv = ClassIcpCvHelper(icp)
 	>>> cross_val_score(icp_cv,
@@ -421,6 +422,7 @@ def class_avg_c(prediction, y, significance):
 	classification model.
 	"""
 	prediction = prediction > significance
+	print(np.sum(prediction), prediction.shape)
 	return np.sum(prediction) / prediction.shape[0]
 
 
