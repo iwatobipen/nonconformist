@@ -422,7 +422,6 @@ def class_avg_c(prediction, y, significance):
 	classification model.
 	"""
 	prediction = prediction > significance
-	print(np.sum(prediction), prediction.shape)
 	return np.sum(prediction) / prediction.shape[0]
 
 
